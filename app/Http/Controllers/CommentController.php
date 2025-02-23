@@ -9,11 +9,13 @@ use App\Http\Requests\StoreCommentRequest;
 class CommentController extends Controller
 {
   
-public function addComment(StoreCommentRequest $request,$id){
+public function addComment(StoreCommentRequest $request){
 
-    $comment=Comment::create([
-        'comment'
+    $comment = auth()->user()->comments()->create([
+        'body' => $request->body,
+        'post_id' => $request->post_id,
     ]);
+    return response()->json($comment,2011);
 
 }
 
