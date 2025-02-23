@@ -14,11 +14,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('posts', [PostController::class, 'index']);
     Route::get('posts/{post}', [PostController::class, 'show']);
     
-    Route::put('posts/{post}', [PostController::class, 'update'])->middleware('check.post.owner');
-    Route::delete('posts/{post}', [PostController::class, 'destroy'])->middleware('check.post.owner');
+    Route::put('posts/{post}', [PostController::class, 'update'])->middleware('chekPost');
+    Route::delete('posts/{post}', [PostController::class, 'destroy'])->middleware('chekPost');
 
     Route::post('comments', [CommentController::class, 'addComment']);
-    Route::delete('comments/{comment}', [CommentController::class, 'deleteComment']);
+    Route::delete('comments/{comment}', [CommentController::class, 'deleteComment'])->middleware('checkComment');
 
     Route::post('logout', [AuthController::class, 'logout']);
 });

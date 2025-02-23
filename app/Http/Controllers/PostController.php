@@ -50,10 +50,7 @@ class PostController extends Controller
     {
         $post=Post::findOrFail($id);
 
-        if(auth()->user()->id !== $post->user_id)
-        {
-            return response()->json(['message'=>'siz bu postni ozgartira olmaysiz'],403);
-        }
+    
 
 
         $post->update([
@@ -71,12 +68,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         
-        if(auth()->user()->id !== $post->user_id)
-        {
-            return response()->json([
-                'message'=>'siz bu postni ochira olmaysiz',403
-            ]);
-        }
+   
         $post->delete();
         return response()->json([
             'message'=>'post ochirildi'

@@ -19,8 +19,14 @@ public function addComment(StoreCommentRequest $request){
 
 }
 
-public function deleteComment(){
+public function deleteComment($id){
+    $comment=Comment::findOrFail($id);
 
+    $comment->delete();
+
+    return response()->json([
+        'message'=>'commment ochirildi' 
+    ]);
 }
 
 
