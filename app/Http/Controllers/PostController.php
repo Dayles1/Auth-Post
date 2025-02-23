@@ -48,6 +48,19 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, string $id)
     {
+        $post=Post::findOrFail($id);
+
+        if(auth()->user()->id !== $post->user_id)
+        {
+            return response()->json(['message'=>'siz bu postni ozgartira olmaysiz'],403);
+        }
+
+
+        $post->update([
+            'title'=>$request->title,
+            'content'=>$request->content,
+        ]);
+        return response()->json($post);
         
     }
 
