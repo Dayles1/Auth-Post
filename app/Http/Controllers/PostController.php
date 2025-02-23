@@ -23,7 +23,14 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {   
-   
+        $user=auth()->user();
+        $post=$user->create([
+            'title'=>$request->title,
+            'content'=>$request->content,
+        ]);
+            return response()->json($post,201);
+
+        
     }
 
     /**
