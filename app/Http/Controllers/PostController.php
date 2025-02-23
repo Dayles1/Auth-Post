@@ -69,6 +69,17 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        
+        if(auth()->user()->id !== $post->user_id)
+        {
+            return response()->json([
+                'message'=>'siz bu postni ochira olmaysiz',403
+            ]);
+        }
+        $post->delete();
+        return response()->json([
+            'message'=>'post ochirildi'
+        ]);
     }
 }
