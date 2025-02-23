@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StorePostRequest;
 
 class PostController extends Controller
 {
@@ -11,15 +14,16 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::with('user')->get();
+        return response()->json($posts);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(StorePostRequest $request)
+    {   
+   
     }
 
     /**
